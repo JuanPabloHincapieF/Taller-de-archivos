@@ -1,0 +1,4 @@
+Ciclista: 3
+Etapa 2: 54 segundos
+Tiempo total: 54 segundos
+
