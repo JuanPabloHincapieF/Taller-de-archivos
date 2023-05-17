@@ -1,0 +1,6 @@
+Juan 1010 25
+Maria 1011 30
+Luis 1111 15
+Ana 1002 10
+Pedro 1102 18
+Laura 1202 8

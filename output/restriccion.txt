@@ -1,0 +1,17 @@
+Nombre: Juan
+Identificación: 1010
+Edad: 25
+
+Nombre: Maria
+Identificación: 1011
+Edad: 30
+
+Nombre: Luis
+Identificación: 1111
+Edad: 15
+
+Nombre: Pedro
+Identificación: 1102
+Edad: 18
+
+Cantidad de usuarios que incumplieron la restricción: 4
