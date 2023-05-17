@@ -1,10 +1,7 @@
 #include <iostream>
 #include <fstream>
-#include <string>
 
 using namespace std;
-
-const int MAX_PACIENTES = 100;
 
 struct Paciente
 {
@@ -15,58 +12,61 @@ struct Paciente
 
 int main()
 {
-    int numPacientes;
+    int cantidadPacientes;
+    ifstream archivoEntrada("historial.txt");
+    ofstream archivoSalida("resultados.txt");
+    Paciente Pac[100];
 
-    cout << "Ingrese la cantidad de pacientes a evaluar: ";
-    cin >> numPacientes;
-
-    // Verificar que no se exceda el límite máximo de pacientes
-    if (numPacientes > MAX_PACIENTES)
-    {
-        cout << "La cantidad de pacientes excede el límite máximo." << endl;
-        return 1;
-    }
-
-    Paciente Pac[MAX_PACIENTES];
-
-    ifstream archivo("historial.txt");
-
-    if (!archivo)
+    if (!archivoEntrada.is_open())
     {
         cout << "Error al abrir el archivo historial.txt" << endl;
         return 1;
     }
 
-    // Leer los datos de los pacientes desde el archivo
-    for (int i = 0; i < numPacientes; i++)
+    if (!archivoSalida.is_open())
     {
-        archivo >> Pac[i].nombre >> Pac[i].cedula >> Pac[i].nivelGlucosa;
+        cout << "Error al abrir el archivo resultados.txt" << endl;
+        return 1;
     }
 
-    archivo.close();
+    cout << "Ingrese la cantidad de pacientes a evaluar: ";
+    cin >> cantidadPacientes;
 
-    // Evaluar los niveles de glucosa de cada paciente
-    for (int i = 0; i < numPacientes; i++)
+    for (int i = 0; i < cantidadPacientes; i++)
     {
-        cout << "Paciente " << i + 1 << ": " << Pac[i].nombre << endl;
-        cout << "Cedula: " << Pac[i].cedula << endl;
-        cout << "Nivel de glucosa: " << Pac[i].nivelGlucosa << endl;
+        archivoEntrada >> Pac[i].nombre >> Pac[i].cedula >> Pac[i].nivelGlucosa;
+    }
+
+    int pacientesConDiabetes = 0;
+
+    for (int i = 0; i < cantidadPacientes; i++)
+    {
+        archivoSalida << "Nombre: " << Pac[i].nombre << endl;
+        archivoSalida << "Cedula: " << Pac[i].cedula << endl;
+        archivoSalida << "Nivel de glucosa: " << Pac[i].nivelGlucosa << endl;
 
         if (Pac[i].nivelGlucosa >= 70 && Pac[i].nivelGlucosa <= 100)
         {
-            cout << "Niveles normales de glucosa..." << endl;
+            archivoSalida << "Niveles normales de glucosa..." << endl;
         }
         else if (Pac[i].nivelGlucosa >= 101 && Pac[i].nivelGlucosa <= 140)
         {
-            cout << "Paciente con diabetes..." << endl;
+            archivoSalida << "Paciente con diabetes..." << endl;
+            pacientesConDiabetes++;
         }
         else
         {
-            cout << "Niveles de glucosa inválidos..." << endl;
+            archivoSalida << "Niveles de glucosa invalidos..." << endl;
         }
 
-        cout << endl;
+        archivoSalida << endl;
     }
+
+    float porcentajeDiabetes = (pacientesConDiabetes / static_cast<float>(cantidadPacientes)) * 100;
+    archivoSalida << "Porcentaje de pacientes con diabetes: " << porcentajeDiabetes << "%" << endl;
+
+    archivoEntrada.close();
+    archivoSalida.close();
 
     return 0;
 }

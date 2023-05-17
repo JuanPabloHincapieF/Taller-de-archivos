@@ -1,0 +1,11 @@
+Nombre: Juan
+Cedula: 12345678
+Nivel de glucosa: 85
+Niveles normales de glucosa...
+
+Nombre: Maria
+Cedula: 98765432
+Nivel de glucosa: 120
+Paciente con diabetes...
+
+Porcentaje de pacientes con diabetes: 50%
