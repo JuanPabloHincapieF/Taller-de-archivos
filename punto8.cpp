@@ -15,11 +15,10 @@ struct Cinema
 
 int main()
 {
-    Cinema cin[MAX_USUARIOS]; // Arreglo de estructuras Cinema
-    int numUsuarios = 0;      // Contador de usuarios
-    int numIncumplidos = 0;   // Contador de usuarios que incumplieron la restricción
+    Cinema cin[MAX_USUARIOS];
+    int numUsuarios = 0;
+    int numIncumplidos = 0;
 
-    // Leer datos de usuarios desde el archivo usuarios.txt
     ifstream archivoUsuarios("usuarios.txt");
     if (!archivoUsuarios)
     {
@@ -38,7 +37,6 @@ int main()
 
     archivoUsuarios.close();
 
-    // Escribir datos de usuarios que incumplieron la restricción en el archivo restriccion.txt
     ofstream archivoRestriccion("restriccion.txt");
     if (!archivoRestriccion)
     {
